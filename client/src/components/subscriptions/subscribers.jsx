@@ -19,7 +19,7 @@ const usernames = [
   "Adighiero",
   "Tylind",
 ];
-const Subscriptions = ({ src }) => {
+const Subscribers = ({ src }) => {
   const [username, setUsername] = useState("");
   const [showAll, setShowAll] = useState(false);
   const [buttonText, setButtonText] = useState(showAllText);
@@ -122,4 +122,4 @@ const Subscriptions = ({ src }) => {
   );
 };
 
-export default Subscriptions;
+export default Subscribers;

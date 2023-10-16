@@ -16,10 +16,11 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import SearchBar from "../search/searchBar";
 import NavOptions from "./navOptions";
 import Subscriptions from "../subscriptions/subscriptions";
+import Subscribers from "../subscriptions/subscribers";
 
 const drawerWidth = 240;
 const appBarHeight = "50px";
-const marginTopToolbar = 2;
+const marginTopToolbar = 1;
 
 const LandingPageNavigation = ({ videoCards, src, username }) => {
   return (
@@ -112,6 +113,10 @@ const LandingPageNavigation = ({ videoCards, src, username }) => {
         <Divider />
         <Typography sx={{ mt: 2, mb: 2, ml: 2 }}>Subscriptions</Typography>
         <Subscriptions />
+        <Divider />
+        <Typography sx={{ mt: 2, mb: 2, ml: 2 }}>Subscribers</Typography>
+        <Subscriptions />
+        <Toolbar />
       </Drawer>
       <Box
         component="main"
