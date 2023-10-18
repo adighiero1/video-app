@@ -16,7 +16,7 @@ import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import SearchBar from "../search/searchBar";
 import NavOptions from "./navOptions";
 import Subscriptions from "../subscriptions/subscriptions";
-import Subscribers from "../subscriptions/subscribers";
+import VideoCards from "../content/videoCards";
 
 const drawerWidth = 240;
 const appBarHeight = "50px";
@@ -123,7 +123,7 @@ const LandingPageNavigation = ({ videoCards, src, username }) => {
         sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
       >
         <Toolbar />
-        {videoCards}
+        <VideoCards />
       </Box>
     </Box>
   );
