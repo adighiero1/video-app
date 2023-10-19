@@ -1,12 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./userReducer";
-import videoReducer from "./videoReducer";
+import userReducer from "./userSlice";
+import videoReducer from "./videoSlice";
+import searchReducer from "./searchSlice";
+import subscriptionsReducer from "./subscriptionsSlice";
+import videoPlaybackReducer from "./videoPlaybackSlice";
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
-    users: userReducer,
-    videos: videoReducer,
-    // Add other reducers for comments, likes, notifications, etc.
+    user: userReducer,
+    video: videoReducer,
+    search: searchReducer,
+    subscriptions: subscriptionsReducer,
+    videoPlayback: videoPlaybackReducer,
   },
 });
 
