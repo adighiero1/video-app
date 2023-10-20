@@ -12,6 +12,7 @@ import SubscriptionsRoundedIcon from "@mui/icons-material/SubscriptionsRounded";
 import VideoLibraryRoundedIcon from "@mui/icons-material/VideoLibraryRounded";
 import SmartDisplayRoundedIcon from "@mui/icons-material/SmartDisplayRounded";
 import ThumbUpRoundedIcon from "@mui/icons-material/ThumbUpRounded";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const listOne = [
   {
@@ -45,6 +46,8 @@ const listTwo = [
 ];
 
 const NavOptions = () => {
+  const lgScreen = useMediaQuery("(min-width:1400px)");
+
   return (
     <>
       <List>
@@ -52,18 +55,22 @@ const NavOptions = () => {
           <ListItem key={index} aria-label={option.arialabel} disablePadding>
             <ListItemButton>
               <ListItemIcon>{option.icon}</ListItemIcon>
-              <ListItemText primary={option.name} />
+              {lgScreen === true ? (
+                <ListItemText primary={option.name} />
+              ) : null}
             </ListItemButton>
           </ListItem>
         ))}
       </List>
-      <Divider />
+      {lgScreen === true ? <Divider /> : null}
       <List>
         {listTwo.map((option, index) => (
           <ListItem key={index} aria-label={option.arialabel} disablePadding>
             <ListItemButton>
               <ListItemIcon>{option.icon}</ListItemIcon>
-              <ListItemText primary={option.name} />
+              {lgScreen === true ? (
+                <ListItemText primary={option.name} />
+              ) : null}
             </ListItemButton>
           </ListItem>
         ))}

@@ -1,109 +1,73 @@
-import React, { Fragment } from "react";
+import React from "react";
 import {
   Card,
   CardMedia,
   CardContent,
-  CardActions,
   Typography,
   Avatar,
 } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2/Grid2";
 
-const contents = [
-  {
-    title: "Video Name Is Pretty Long So Let's See What Happens",
-    creator: "Lawrence Williams",
-    viewCount: 10,
-    date: "2 hours ago",
-  },
-  {
-    title: "Video With a Short Title",
-    creator: "Lawrence Williams",
-    viewCount: 250,
-    date: "3 weeks ago",
-  },
-  {
-    title: "Reminder: Set Title Character Length",
-    creator: "Lawrence Williams",
-    viewCount: 250000,
-    date: "07/27/2023",
-  },
-  {
-    title: "Reminder: Set Title Character Length",
-    creator: "Lawrence Williams",
-    viewCount: 250000,
-    date: "07/27/2023",
-  },
-];
+const VideoCards = ({ cardWidth, content }) => {
+  const aspectRatio = 9 / 16;
+  const cardHeight = `${cardWidth * aspectRatio}px`;
 
-const VideoCards = ({ height, width, src, alt, title }) => {
   return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        justifyContent: "flex-start",
-        margin: "auto",
-      }}
-    >
-      {contents.map((content) => (
-        <Grid
-          container
-          style={{
-            display: "flex",
-            justifyContent: "space-around",
-            height: "275px",
-            width: "383px",
+    <Grid container sx={{ display: "flex", flexDirection: "column" }}>
+      <Card
+        elevation={0}
+        sx={{
+          height: cardHeight,
+          width: cardWidth,
+          borderRadius: 3,
+          mt: 1,
+        }}
+      >
+        <CardMedia
+          sx={{
+            height: "100%",
+            width: "100%",
+            backgroundColor: "#d9d9d9",
           }}
-        >
-          <Card
-            elevation={1}
+          component="video"
+          title="Video Name"
+          children="https://www.youtube.com/watch?v=N2mqbhpSfdg"
+          alt="coming in hot music video"
+        />
+      </Card>
+      <Card elevation={0} sx={{ width: cardWidth }}>
+        <CardContent sx={{ pl: 0, height: "100px" }}>
+          <Grid
+            container
             sx={{
-              height: "270px",
-              width: "100%",
-              borderRadius: 3,
-              mt: 1,
-              mr: 1,
-              ml: 1,
+              display: "flex",
+              alignItems: "flex-start",
+              pl: 2,
             }}
           >
-            <CardMedia
-              sx={{ height: "60%", width: "100%" }}
-              component="video"
-              title="Video Name"
-              children="https://www.youtube.com/watch?v=N2mqbhpSfdg"
-              alt="coming in hot music video"
-            />
-
-            <CardContent>
-              <Grid
-                container
+            <Grid
+              sx={{
+                width: "10%",
+              }}
+            >
+              <Avatar sx={{ height: 30, width: 30 }} />
+            </Grid>
+            <Grid sx={{ ml: 2, width: "83%" }}>
+              <Typography
                 sx={{
-                  display: "flex",
-                  alignItems: "flex-start",
+                  fontSize: "medium",
+                  fontWeight: 550,
+                  lineHeight: "1.325rem",
                 }}
               >
-                <Grid sx={{ width: "10%" }}>
-                  <Avatar sx={{ height: 24, width: 24 }} />
-                </Grid>
-                <Grid sx={{ ml: 1, width: "85%" }}>
-                  <Typography
-                    sx={{
-                      fontSize: "medium",
-                      fontWeight: 550,
-                      lineHeight: "1.325rem",
-                    }}
-                  >
-                    {content.title}
-                  </Typography>
-                  <Typography variant="body2">{content.creator}</Typography>
-                  <Typography variant="body2">{`${content.viewCount} views | ${content.date}`}</Typography>
-                </Grid>
-              </Grid>
-            </CardContent>
-          </Card>
-        </Grid>
-      ))}
+                {content.title}
+              </Typography>
+              <Typography variant="body2">{content.creator}</Typography>
+              <Typography variant="body2">{`${content.viewCount} views | ${content.date}`}</Typography>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
     </Grid>
   );
 };

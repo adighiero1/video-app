@@ -6,13 +6,15 @@ import {
   Link,
   BrowserRouter,
 } from "react-router-dom";
-import LandingPage from "./pages/landingPage/landingPage";
+import LandingPage from "./pages/landingPage";
+import SingleVideoPage from "./pages/singleVideoPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/:id" element={<SingleVideoPage />} />
       </Routes>
     </BrowserRouter>
   );
