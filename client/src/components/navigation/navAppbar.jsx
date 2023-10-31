@@ -1,5 +1,15 @@
-import React from "react";
-import { IconButton, Badge, Avatar, Box, AppBar, Toolbar } from "@mui/material";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  IconButton,
+  Badge,
+  Avatar,
+  Box,
+  AppBar,
+  Toolbar,
+  ButtonBase,
+  Paper,
+} from "@mui/material";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsRoundedIcon from "@mui/icons-material/NotificationsRounded";
 import SearchBar from "../search/searchBar";
@@ -9,6 +19,13 @@ const appBarHeight = "50px";
 const marginTopToolbar = 1;
 
 const NavAppbar = ({ videoCards, src, username }) => {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
+  const toSignIn = () => {
+    navigate("/signin");
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -52,19 +69,36 @@ const NavAppbar = ({ videoCards, src, username }) => {
               <NotificationsRoundedIcon color="primary" />
             </Badge>
           </IconButton>
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-haspopup="true"
-            color="inherit"
-          >
-            <Avatar
-              src={src}
-              alt={username}
-              sx={{ width: 30, height: 30, mr: 1 }}
-            />
-          </IconButton>
+          {loggedIn ? (
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account of current user"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <Avatar
+                src={src}
+                alt={username}
+                sx={{ width: 30, height: 30, mr: 1 }}
+              />
+            </IconButton>
+          ) : (
+            <ButtonBase onClick={toSignIn}>
+              <Paper
+                elevation={0}
+                sx={{
+                  ml: 2,
+                  border: ".5px gray solid",
+                  borderRadius: 15,
+                  padding: "5px",
+                  width: "75px",
+                }}
+              >
+                Sign In
+              </Paper>
+            </ButtonBase>
+          )}
         </Box>
       </Toolbar>
     </AppBar>

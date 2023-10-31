@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import LandingPage from "./pages/landingPage";
 import SingleVideoPage from "./pages/singleVideoPage";
+import SignInPage from "./pages/signInPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/:id" element={<SingleVideoPage />} />
+        <Route path="/signin" element={<SignInPage />} />
       </Routes>
     </BrowserRouter>
   );
