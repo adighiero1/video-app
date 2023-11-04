@@ -1,79 +1,75 @@
-import React from "react";
-import Grid from "@mui/material/Unstable_Grid2/Grid2";
-import { useNavigate } from "react-router-dom";
-import { Card, TextField, Button, Box } from "@mui/material";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-const cardStyling = {
-  border: ".5px gray solid",
-  height: "70vh",
-  width: "40vw",
-  borderRadius: "15px",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-};
-
-const inputStyling = {
-  height: "40px",
-  width: "80%",
-  mt: 5,
-};
+import { registerUser } from "../store/userSlice"; // Assuming you have an action for user registration
+import { useNavigate } from "react-router-dom"; // Use useNavigate instead of useHistory
+import { useDispatch } from "react-redux";
 
 const SignUpPage = () => {
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    name: "",
+  });
 
-  const toSignIn = () => {
-    navigate("/signin"); // Navigate to the Sign In page
+  const navigate = useNavigate(); // Use useNavigate to navigate
+
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Dispatch the registration action with form data
+      await dispatch(registerUser(formData));
+      navigate("/login"); // Use navigate to redirect to the login page
+    } catch (error) {
+      // Handle registration error
+      console.error(error);
+    }
   };
 
   return (
-    <Grid
-      container
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      <Card elevation={5} sx={cardStyling}>
-        <h1>Sign Up</h1>
-        <TextField
+    <div>
+      <h2>Registration</h2>
+      <form onSubmit={handleSubmit}>
+        <input
           type="text"
-          label="Email"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          autoFocus
-          sx={inputStyling}
+          name="username"
+          placeholder="Username"
+          value={formData.username}
+          onChange={handleChange}
         />
-        <TextField
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <input
           type="password"
-          label="Password"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          sx={inputStyling}
+          name="password"
+          placeholder="Password"
+          value={formData.password}
+          onChange={handleChange}
         />
-        <Button
-          sx={{
-            mt: 5,
-            width: "60%",
-            border: ".5px gray solid",
-            borderRadius: 15,
-          }}
-        >
-          Sign Up
-        </Button>
-        <Box sx={{ mt: 5 }}>
-          <p style={{ textAlign: "center" }}>
-            Already have an account? <Link to="/signin">Sign In</Link>
-          </p>
-        </Box>
-      </Card>
-    </Grid>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <button type="submit">Register</button>
+      </form>
+      <p>
+        Already have an account? <Link to="/login">Login</Link>
+      </p>
+    </div>
   );
 };
 
