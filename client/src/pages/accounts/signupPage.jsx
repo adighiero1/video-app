@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { registerUser } from "../store/userSlice"; // Assuming you have an action for user registration
+import { registerUser } from "../../store/userSlice"; // Assuming you have an action for user registration
 import { useNavigate } from "react-router-dom"; // Use useNavigate instead of useHistory
 import { useDispatch } from "react-redux";
+import {
+  divStyle,
+  formStyle,
+  inputFieldsStyling,
+  divButtonStyle,
+  buttonStyling,
+  paragraphStyle,
+} from "./style.signup";
+import NavAppbar from "../../components/navigation/navAppbar";
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +34,7 @@ const SignUpPage = () => {
     try {
       // Dispatch the registration action with form data
       await dispatch(registerUser(formData));
-      navigate("/login"); // Use navigate to redirect to the login page
+      navigate("/"); // Use navigate to redirect to the login page
     } catch (error) {
       // Handle registration error
       console.error(error);
@@ -33,13 +42,15 @@ const SignUpPage = () => {
   };
 
   return (
-    <div>
+    <div style={divStyle}>
       <h2>Registration</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={formStyle}>
         <input
           type="text"
           name="username"
           placeholder="Username"
+          autoComplete="Username"
+          style={inputFieldsStyling}
           value={formData.username}
           onChange={handleChange}
         />
@@ -47,6 +58,8 @@ const SignUpPage = () => {
           type="email"
           name="email"
           placeholder="Email"
+          autoComplete="Email"
+          style={inputFieldsStyling}
           value={formData.email}
           onChange={handleChange}
         />
@@ -54,6 +67,8 @@ const SignUpPage = () => {
           type="password"
           name="password"
           placeholder="Password"
+          autoComplete="Password"
+          style={inputFieldsStyling}
           value={formData.password}
           onChange={handleChange}
         />
@@ -61,13 +76,19 @@ const SignUpPage = () => {
           type="text"
           name="name"
           placeholder="Name"
+          autoComplete="Name"
+          style={inputFieldsStyling}
           value={formData.name}
           onChange={handleChange}
         />
-        <button type="submit">Register</button>
+        <div style={divButtonStyle}>
+          <button type="submit" style={buttonStyling}>
+            Register
+          </button>
+        </div>
       </form>
-      <p>
-        Already have an account? <Link to="/login">Login</Link>
+      <p style={paragraphStyle}>
+        Already have an account? <Link to="/signin">Login</Link>
       </p>
     </div>
   );

@@ -18,8 +18,9 @@ const drawerWidth = 240;
 const appBarHeight = "50px";
 const marginTopToolbar = 1;
 
-const NavAppbar = ({ videoCards, src, username }) => {
+const NavAppbar = ({ videoCards, src, username, user }) => {
   const [loggedIn, setLoggedIn] = useState(false);
+
   const navigate = useNavigate();
 
   const toSignIn = () => {
