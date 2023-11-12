@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { registerUser } from "../store/userSlice"; // Assuming you have an action for user registration
-import { useNavigate } from "react-router-dom"; // Use useNavigate instead of useHistory
-import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "../store/userSlice";
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    password: "",
-    name: "",
+    password: "", // Use plain text password
   });
 
-  const navigate = useNavigate(); // Use useNavigate to navigate
-
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,9 +21,16 @@ const SignUpPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Dispatch the registration action with form data
       await dispatch(registerUser(formData));
-      navigate("/login"); // Use navigate to redirect to the login page
+
+      if (user.isAuthenticated) {
+        // Registration successful, navigate to success page or home page
+        console.log("Registration successful!");
+        navigate("/success"); // Replace with your desired success page route
+      } else {
+        // Handle registration error
+        console.log("Registration failed.");
+      }
     } catch (error) {
       // Handle registration error
       console.error(error);
@@ -57,13 +62,7 @@ const SignUpPage = () => {
           value={formData.password}
           onChange={handleChange}
         />
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-        />
+
         <button type="submit">Register</button>
       </form>
       <p>

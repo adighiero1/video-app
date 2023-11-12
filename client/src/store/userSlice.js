@@ -15,7 +15,7 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async (userId) => {
 export const registerUser = createAsyncThunk(
   "user/registerUser",
   async (formData) => {
-    const response = await axios.post("/api/register", formData);
+    const response = await axios.post("/server/auth/register", formData);
     return response.data;
   }
 );
@@ -35,12 +35,12 @@ const userSlice = createSlice({
         state.user = null;
       })
       .addCase(registerUser.fulfilled, (state, action) => {
-        // Handle successful user registration here
-        // You can update the state or take any other necessary actions
+        state.isAuthenticated = true; //User is authenticated.
+        state.user = action.payload; //store user date in the state.
       })
       .addCase(registerUser.rejected, (state, action) => {
-        // Handle registration failure here
-        // You can update the state or take any other necessary actions
+        state.isAuthenticated = false; // User is not Authenticated.
+        state.user = null; // Clear user data.
       });
   },
 });
