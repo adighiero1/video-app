@@ -7,16 +7,50 @@ const initialState = {
 };
 
 export const fetchUser = createAsyncThunk("user/fetchUser", async (userId) => {
-  const response = await axios.get(`/api/users/${userId}`);
+  const response = await axios.get(
+    `"http://localhost:8800/server/auth/register"${userId}`
+  );
   return response.data;
 });
 
 // Action to register a user
+// export const registerUser = createAsyncThunk(
+//   "user/registerUser",
+//   async (formData) => {
+//     const response = await axios.post(
+//       "http://localhost:8800/server/auth/register",
+//       formData
+//     );
+//     return response.data;
+//   }
+
+// );
+
 export const registerUser = createAsyncThunk(
   "user/registerUser",
-  async (formData) => {
-    const response = await axios.post("/server/auth/register", formData);
-    return response.data;
+  async (formData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8800/server/auth/register",
+        formData
+      );
+
+      if (response.status === 200) {
+        console.log("Registration successful!"); // Log success message
+
+        // Assuming the backend returns a user object upon successful registration
+        return response.data.user; // Dispatch `fulfilled` with user data
+      } else {
+        console.log("Registration failed with status:", response.status); // Log failure status
+
+        // Dispatch `rejected` with an error message or specific data
+        return rejectWithValue(response.statusText);
+      }
+    } catch (error) {
+      console.error("Registration failed with error:", error.message); // Log network error
+
+      return rejectWithValue(error.message); // Dispatch `rejected` on network error
+    }
   }
 );
 

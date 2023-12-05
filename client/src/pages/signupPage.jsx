@@ -22,7 +22,7 @@ const SignUpPage = () => {
     e.preventDefault();
     try {
       await dispatch(registerUser(formData));
-
+      console.log(user.isAuthenticated);
       if (user.isAuthenticated) {
         // Registration successful, navigate to success page or home page
         console.log("Registration successful!");
