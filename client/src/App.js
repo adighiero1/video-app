@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/landingPage";
 import SingleVideoPage from "./pages/singleVideoPage";
-import SignInPage from "./pages/accounts/signInPage";
+import LoginPage from "./pages/loginPage";
 import SignUpPage from "./pages/signupPage";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/:id" element={<SingleVideoPage />} />
-        <Route path="/signin" element={<SignInPage />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
       </Routes>
     </BrowserRouter>
