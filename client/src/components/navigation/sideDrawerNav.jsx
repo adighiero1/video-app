@@ -12,10 +12,10 @@ import NavOptions from "./navOptions";
 import Subscriptions from "../subscriptions/subscriptions";
 import VideosToRender from "../content/videosToRender";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import NavAppbar from "./navAppbar";
+import NavAppbar from "./appbar";
 import Logo from "../../assets/logo";
 
-const LandingPageNavigation = () => {
+const SideDrawerNavigation = () => {
   const lgScreen = useMediaQuery("(min-width:1400px)");
   const drawerWidth = 240;
 
@@ -23,8 +23,7 @@ const LandingPageNavigation = () => {
     <Box sx={{ display: "flex" }}>
       {/* Figure out what CSSBaseline is */}
       <CssBaseline />
-      <NavAppbar />
-      <Drawer
+      {/* <Drawer
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -49,20 +48,15 @@ const LandingPageNavigation = () => {
         ) : null}
 
         <Toolbar />
-      </Drawer>
+      </Drawer> */}
       <Box
         component="main"
         sx={{ flexGrow: 1, bgcolor: "background.default", p: 3 }}
       >
         <Toolbar />
-        <VideosToRender
-          containerHeight={"310px"}
-          containerWidth={"350px"}
-          cardHeight={"300px"}
-        />
       </Box>
     </Box>
   );
 };
 
-export default LandingPageNavigation;
+export default SideDrawerNavigation;
